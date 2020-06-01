@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	 crossorigin="anonymous">
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+	 crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.14/dist/tesseract.min.js"></script>
+  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+	<script src="./js/pdf.js"></script>
+	<script src="./js/pdf.worker.js"></script>
+	<script src="./js/jquery-3.3.1.js"></script>
+  <script src="./js/opendyslexic-font.js"></script>
+  <script src="./js/comicsans-font.js"></script>
+  <script src="./js/opendyslexicmono-font.js"></script>
+  <script src="./js/arial-font.js"></script>
+  <script src="./js/helvetica-font.js"></script>
+  <script src="./js/verdana-font.js"></script>
+	<script src="./js/script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+	<script src="https://cdn.rawgit.com/sphilee/jsPDF-CustomFonts-support/bcc544cd/dist/jspdf.customfonts.min.js"></script>
+	<script src="https://cdn.rawgit.com/stuehler/jsPDF-CustomFonts-support/master/dist/default_vfs.js"></script>
+
+
+
+	<title>Dsylexia Font Converter</title>
+	<link rel="stylesheet" href="./css/index.css">
+
+</head>
+
+<body>
+	<nav id="navbarTop" class="navbar navbar-dark bg-primary navbar-inverse">
+		<!-- Brand Logo -->
+		<a class="navbar-brand" href="index.html">
+			<img src="./image/dhcLogo.png" width="auto" height="40" style="padding: 0;" class="d-inline-block align-top" alt="Brand Logo">
+		</a>
+		<div class="navbar-header">
+      <a class="navbar-brand" href="index.html">Dyslexic Font Converter</a>
+    </div>
+
+		<!-- Tabs -->
+			<ul class="nav navbar-nav navbar-right">
+
+				<!-- File Tab -->
+				<li class="nav-item">
+					<a class="nav-link" href="about.html">About<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+
+	</nav>
+
+	<div class="container">
+		<!-- change font-family dropdown -->
+		<h4>Change font</h4>
+		<div class="btn-group btn-xs">
+			<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+			 id="dropDownFont">
+				Fonts
+			</button>
+			<div class="dropdown-menu">
+				<h6 class="dropdown-header">Made for Dyslexia Fonts</h6>
+				<button id='change-od-reg-btn' class="dropdown-item" type="button">OpenDyslexia Regular</button>
+				<button id='change-od-mono-btn' class="dropdown-item" type="button">OpenDyslexia Monospace</button>
+				<div class="dropdown-divider"></div>
+				<h6 class="dropdown-header">Dyslexia Friendly Fonts</h6>
+				<button id='change-arial-btn' class="dropdown-item" type="button">Arial</button>
+				<button id='change-comic-sans-btn' class="dropdown-item" type="button">Comic Sans</button>
+				<button id='change-helvetica-btn' class="dropdown-item" type="button">Helvetica</button>
+				<button id='change-verdana-btn' class="dropdown-item" type="button">Verdana</button>
+			</div>
+			<!-- Change font size -->
+			<form class="form-inline border border-secondary m-1 bg-light">
+				<label>Font Size</label>
+				<input id="font-size-input" type="number" min="10" max="32" value="12">
+			</form>
+		</div>
+		<hr class="my-1">
+	</div>
+
+	<div class="container">
+		<h4>Upload file</h4>
+		<div class="d-inline-block">
+			<form action="" method="post" enctype="multipart/form-data" id="js-upload-form" class="form-inline">
+				<!-- upload file button -->
+				<div class="border border-secondary">
+					<div class="form-group">
+						<input type="file" name="files[]" id="js-upload-files">
+					</div>
+				</div>
+			</form>
+		</div>
+		<hr class="my-1">
+	</div>
+
+	<!-- text to speech -->
+	<div class="container">
+		<h4>Use text to speech</h4>
+		<button type="button" name="play" id="play" class="btn btn-success">Play/Pause</button>
+		<button type="button" name="stop" id="stop" class="btn btn-danger">Stop</button>
+	</div>
+
+	<!-- text area -->
+	<div class="container">
+		<!-- instructions -->
+		<hr />
+		<p>The conversion currently handles: txt, pdf, png, and jpg files.</p>
+		<p>Insert your text using one of three options:</p>
+		<ol>
+			<li>Copy and paste directly into the text area</li>
+			<li>Upload using the choose file button</li>
+			<li>Drag and drop the file directly into the text area</li>
+		</ol>
+		<hr class="my-4">
+		<textarea id="text-display" class="form-control" rows="20" placeholder="Copy and paste, upload, or drag and drop files for font conversion."></textarea>
+		<!-- download button -->
+		<div class="m-1">
+				<button type="button" class="btn btn-sm btn-primary" id="button1">Download</button>
+		</div>
+	</div>
+  
+  <script>
+    //global variable for font change
+    var fontStr = "OpenDyslexic";
+  </script>
+
+	<!-- JS for font converting function -->
+	<script src="js/change-font.js"></script>
+
+</body>
+
+</html>
